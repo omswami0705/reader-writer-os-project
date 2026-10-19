@@ -1,0 +1,2 @@
+This is the shared file.
+Reader-Writer synchronization project.
