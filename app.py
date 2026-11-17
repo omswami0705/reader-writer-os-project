@@ -83,10 +83,10 @@ MODE_LABELS = {
 # ------------------------------------------------------------
 
 st.title("Reader-Writer Synchronization System")
-st.caption(
-    "Streamlit is only the interface. The actual synchronization "
-    "is done in Python using threading (synchronization.py)."
-)
+# st.caption(
+#     "The synchronization "
+#     "is done in Python using threading."
+# )
 
 
 # ------------------------------------------------------------
@@ -98,7 +98,7 @@ st.caption(
 def shared_resource_and_status():
 
     # ---- Shared resource: data.txt ----
-    st.subheader("Shared Resource: data.txt")
+    st.subheader("Shared Resource Content")
 
     content = sim.read_file_content()
 
@@ -122,7 +122,7 @@ def shared_resource_and_status():
     c3.metric("Waiting Readers", status["waiting_readers"])
     c4.metric("Waiting Writers", status["waiting_writers"])
 
-    st.write(f"**Resource Status:** {status['resource_status']}")
+    # st.write(f"**Resource Status:** {status['resource_status']}")
     st.write(f"**Mode:** {status['mode']}")
 
 
@@ -168,25 +168,10 @@ with col2:
     if st.button("Start Writer"):
         sim.start_writer(writer_text.strip() or None)
 
-# ---- Multiple Readers / Writers ----
-count = st.slider("How many threads to start together?", 1, 5, 3)
-
-col3, col4 = st.columns(2)
-
-with col3:
-    if st.button("Start Multiple Readers"):
-        sim.start_readers(count)
-
-with col4:
-    if st.button("Start Multiple Writers"):
-        sim.start_writers(count)
 
 # ---- Demo and Reset ----
 col5, col6 = st.columns(2)
 
-with col5:
-    if st.button("Run Reader-Writer Demo"):
-        sim.run_demo()
 
 with col6:
     if st.button("Reset Simulation"):
